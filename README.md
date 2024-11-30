@@ -36,12 +36,15 @@ This will generate the hexdocs with the default configuration:
 
 ## Option 2: Custom Config
 ```gleam
-//// file `scripts/generate_hexdocs.gleam`
+//// file `src/dev/generate_hexdocs.gleam`
 import hexdocs_offline.{generate}
-import hexdocs_offline/config.{Config, default_config, with_docs_dir, with_include_dev, with_ignore_deps}
+import hexdocs_offline/config.{
+  default_config, with_docs_dir, with_ignore_deps, with_include_dev,
+}
 
 pub fn main() {
-  let config = default_config()
+  let config =
+    default_config()
     |> with_docs_dir("./docs/hex")
     |> with_include_dev(False)
     |> with_ignore_deps(["..."])
@@ -51,7 +54,7 @@ pub fn main() {
 ```
 
 ```sh
-gleam run -m generate_hexdocs
+gleam run -m dev/generate_hexdocs
 ```
 
 # Notices
