@@ -9,8 +9,8 @@ repository = { type = "github", user = "daniellionel01", repo = "hexdocs_offline
 internal_modules = [
   "hexdocs_offline/internal",
   "hexdocs_offline/internal/*",
-  "hexdocs_offline/dev",
-  "hexdocs_offline/dev/*",
+  "dev",
+  "dev/*",
 ]
 
 [dependencies]
