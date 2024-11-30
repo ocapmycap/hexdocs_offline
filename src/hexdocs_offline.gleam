@@ -1,3 +1,4 @@
+import gleam/io
 import gleam/list
 import gleam/string
 import glexec as exec
@@ -15,12 +16,19 @@ pub fn main() {
 
 pub fn generate(conf: Config) {
   let assert Ok(deps) = toml.get_deps(conf)
+  io.println(
+    "Dependencies fetched: "
+    <> { list.map(deps, fn(dep) { dep.name }) |> string.join(", ") },
+  )
 
+  io.println("Downloading Docs...")
   let assert Ok(deps_with_paths) = download_docs(deps, [])
   let assert Ok(_) = ensure_permissions(conf, deps_with_paths)
 
   let output = gen_output(deps_with_paths)
-  simplifile.write(to: conf.output_path, contents: output)
+  let assert Ok(_) = simplifile.write(to: conf.output_path, contents: output)
+
+  io.println("Output Successfull: " <> conf.output_path)
 }
 
 fn gen_output(deps: List(DownloadResult)) {
