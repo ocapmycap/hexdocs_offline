@@ -1,4 +1,3 @@
-import gleam/list
 import hexdocs_offline/config.{type Config, default_config}
 import hexdocs_offline/toml
 import simplifile as fs

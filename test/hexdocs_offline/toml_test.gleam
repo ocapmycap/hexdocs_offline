@@ -22,4 +22,11 @@ pub fn parse_test() {
   should.equal(deps, [
     "gleam_http", "gleam_httpc", "gleam_stdlib", "simplifile", "tom",
   ])
+
+  let conf =
+    conf
+    |> config.with_include_dev(True)
+    |> config.with_ignore_deps(["gleam_http", "gleam_httpc"])
+  let assert Ok(deps) = toml.get_deps(conf)
+  should.equal(deps, ["gleam_stdlib", "simplifile", "tom", "gleeunit"])
 }
