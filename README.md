@@ -85,10 +85,10 @@ gleam test  # Run the tests
 
 # Acknowledgements
 
-- Thank you `simplecss` ([GitHub](https://github.com/kevquirk/simple.css/))
+- Thank you `simplecss` ([GitHub](https://github.com/kevquirk/simple.css/)) (https://github.com/kevquirk)
 - Thank you [Mix Docs](https://hexdocs.pm/hex/Mix.Tasks.Hex.Docs.html) for saving me a lot of pain of recreating this myself
-- Thank you to `go_over` ([Hex](https://hex.pm/packages/go_over), [GitHub](https://github.com/bwireman/go-over)) for inspiring the code that reads out the `gleam.toml` file
-- Thank you to `squirrel` ([Hex](https://hex.pm/packages/squirrel), [GitHub](https://github.com/giacomocavalieri/squirrel)) for a lot of the code and repository structure inspiration
+- Thank you to `go_over` ([Hex](https://hex.pm/packages/go_over), [GitHub](https://github.com/bwireman/go-over)) for inspiring the code that reads out the `gleam.toml` file (https://github.com/bwireman)
+- Thank you to `squirrel` ([Hex](https://hex.pm/packages/squirrel), [GitHub](https://github.com/giacomocavalieri/squirrel)) for a lot of the code and repository structure inspiration (https://github.com/giacomocavalieri)
 
 # License
 [Apache License, Version 2.0](./LICENSE)
