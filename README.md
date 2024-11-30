@@ -1,13 +1,5 @@
 # Hexdocs Offline
 
-## TODO
-- [ ] inspiration for readme
-- [ ] module & function docs
-- [ ] inspiration main function
-- [ ] examples directory
-- [ ] testing
-- [ ] internal package
-
 ## Usage
 ```gleam
 //// file `hexdocs/generate_hexdocs.gleam`
@@ -42,3 +34,4 @@ gleam test  # Run the tests
 ## Acknowledgements
 
 - Thank you to `go_over` ([Hex](https://hex.pm/packages/go_over), [GitHub](https://github.com/bwireman/go-over)) for inspiring the code that reads out the `gleam.toml` file
+- Thank you to `squirrel` ([Hex](https://hex.pm/packages/squirrel), [GitHub](https://github.com/giacomocavalieri/squirrel)) for a lot of the code and repository structure inspiration
