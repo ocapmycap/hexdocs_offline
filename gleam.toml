@@ -1,5 +1,8 @@
 name = "hexdocs_offline"
-version = "1.0.0"
+version = "0.0.1"
+
+description = "Downloads an offline version of the hexdocs of your projects dependencies to a local folder"
+licences = ["Apache-2.0"]
 
 [dependencies]
 gleam_stdlib = ">= 0.34.0 and < 2.0.0"
