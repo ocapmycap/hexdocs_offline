@@ -1,5 +1,8 @@
 # Hexdocs Offline
 
+[![Package Version](https://img.shields.io/hexpm/v/squirrel)](https://hex.pm/packages/hexdocs_offline)
+[![Hex Docs](https://img.shields.io/badge/hex-docs-ffaff3)](https://hexdocs.pm/hexdocs_offline/)
+
 Download an offline version of the hexdocs of your projects dependencies to a local folder.
 
 # Demo
