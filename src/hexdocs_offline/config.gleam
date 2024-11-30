@@ -15,6 +15,7 @@ pub type Config {
   )
 }
 
+/// read more here: https://hexdocs.pm/hex/Mix.Tasks.Hex.Config.html
 pub fn default_hex_home() {
   "~/.hex"
 }
