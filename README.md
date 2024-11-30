@@ -5,7 +5,7 @@
 //// file `hexdocs/generate_hexdocs.gleam`
 import hexdocs_offline.{generate, Config}
 
-pub fn main() }
+pub fn main() {
   let config = Config(
     file_path: "test",
     docs_dir: "",

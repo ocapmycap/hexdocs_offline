@@ -6,6 +6,7 @@ pub fn main() {
   gleeunit.main()
 }
 
+/// tests the parsing of the gleam.toml file of this project itself
 pub fn parse_test() {
   let assert Ok(deps) = toml.get_deps()
 
