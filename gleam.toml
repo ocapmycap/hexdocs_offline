@@ -6,12 +6,7 @@ licences = ["Apache-2.0"]
 
 repository = { type = "github", user = "daniellionel01", repo = "hexdocs_offline" }
 
-internal_modules = [
-  "hexdocs_offline/internal",
-  "hexdocs_offline/internal/*",
-  "dev",
-  "dev/*",
-]
+internal_modules = ["hexdocs_offline/internal", "hexdocs_offline/internal/*"]
 
 [dependencies]
 gleam_stdlib = ">= 0.34.0 and < 2.0.0"
