@@ -9,4 +9,4 @@ To generate the docs, you can run:
 gleam run -m hexdocs_offline
 ```
 
-Here is the resulting [HEXDOCS.md](./HEXDOCS.md)
+Here is the resulting [HEXDOCS.html](./HEXDOCS.html)

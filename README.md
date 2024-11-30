@@ -15,7 +15,7 @@ All this package does is fetch the dependencies from the `gleam.toml` file and u
 
 # Demo
 
-[HEXDOCS.md](./HEXDOCS.md) for this project
+[HEXDOCS.html](./HEXDOCS.html) for this project
 
 # Platform Support
 
