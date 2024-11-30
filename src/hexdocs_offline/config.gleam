@@ -1,3 +1,5 @@
+import gleam/list
+
 pub type Config {
   Config(
     file_path: String,
@@ -24,8 +26,7 @@ pub fn default_config() -> Config {
   )
 }
 
-pub fn ignore_dep(config: Config, dep: String) -> Config {
-  let ignore_deps = config.ignore_deps |> list.append([dep])
+pub fn with_ignore_deps(config: Config, ignore_deps: List(String)) -> Config {
   Config(..config, ignore_deps:)
 }
 
@@ -35,4 +36,8 @@ pub fn with_file_path(config: Config, file_path: String) -> Config {
 
 pub fn with_docs_dir(config: Config, docs_dir: String) -> Config {
   Config(..config, docs_dir:)
+}
+
+pub fn with_include_dev(config: Config, include_dev: Bool) -> Config {
+  Config(..config, include_dev:)
 }

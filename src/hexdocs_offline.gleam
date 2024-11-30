@@ -1,6 +1,5 @@
-import gleam/list
 import gleam/result
-import hexdocs_offline/config.{type Config}
+import hexdocs_offline/config.{type Config, default_config}
 import hexdocs_offline/toml
 
 pub fn main() {

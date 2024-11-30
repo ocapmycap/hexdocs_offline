@@ -5,6 +5,9 @@
 
 Download an offline version of the hexdocs of your projects dependencies to a local folder.
 
+Useful for if you are travelling a lot and do not have a great or any internet connection at all times.
+Or if you just want to have a centralized index page for all of the hexdocs of your dependencies and close 10 of those tabs.
+
 # Demo
 
 TODO
@@ -33,17 +36,16 @@ This will generate the hexdocs with the default configuration:
 
 ## Option 2: Custom Config
 ```gleam
-//// file `hexdocs/generate_hexdocs.gleam`
+//// file `scripts/generate_hexdocs.gleam`
 import hexdocs_offline.{generate}
-import hexdocs_offline/config.{Config, default_file_path}
+import hexdocs_offline/config.{Config, default_config, with_docs_dir, with_include_dev, with_ignore_deps}
 
 pub fn main() {
-  let config = Config(
-    file_path: default_file_path(),
-    docs_dir: "./docs/hex",
-    include_dev: False,
-    ignore_deps: []
-  )
+  let config = default_config()
+    |> with_docs_dir("./docs/hex")
+    |> with_include_dev(False)
+    |> with_ignore_deps(["..."])
+
   generate(config)
 }
 ```
