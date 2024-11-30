@@ -14,9 +14,9 @@ pub fn parse_test() {
     |> config.with_include_dev(True)
   let assert Ok(deps) = toml.get_deps(conf)
   should.equal(deps, [
-    toml.Dependency(name: "gleam_http", version: "3.7.1"),
-    toml.Dependency(name: "gleam_httpc", version: "3.0.0"),
     toml.Dependency(name: "gleam_stdlib", version: "0.45.0"),
+    toml.Dependency(name: "glexec", version: "1.0.3"),
+    toml.Dependency(name: "nakai", version: "1.1.1"),
     toml.Dependency(name: "simplifile", version: "2.2.0"),
     toml.Dependency(name: "tom", version: "1.1.0"),
     toml.Dependency(name: "gleeunit", version: "1.2.0"),
@@ -25,9 +25,9 @@ pub fn parse_test() {
   let conf = config.with_include_dev(conf, False)
   let assert Ok(deps) = toml.get_deps(conf)
   should.equal(deps, [
-    toml.Dependency(name: "gleam_http", version: "3.7.1"),
-    toml.Dependency(name: "gleam_httpc", version: "3.0.0"),
     toml.Dependency(name: "gleam_stdlib", version: "0.45.0"),
+    toml.Dependency(name: "glexec", version: "1.0.3"),
+    toml.Dependency(name: "nakai", version: "1.1.1"),
     toml.Dependency(name: "simplifile", version: "2.2.0"),
     toml.Dependency(name: "tom", version: "1.1.0"),
   ])
@@ -35,10 +35,11 @@ pub fn parse_test() {
   let conf =
     conf
     |> config.with_include_dev(True)
-    |> config.with_ignore_deps(["gleam_http", "gleam_httpc"])
+    |> config.with_ignore_deps(["gleam_stdlib"])
   let assert Ok(deps) = toml.get_deps(conf)
   should.equal(deps, [
-    toml.Dependency(name: "gleam_stdlib", version: "0.45.0"),
+    toml.Dependency(name: "glexec", version: "1.0.3"),
+    toml.Dependency(name: "nakai", version: "1.1.1"),
     toml.Dependency(name: "simplifile", version: "2.2.0"),
     toml.Dependency(name: "tom", version: "1.1.0"),
     toml.Dependency(name: "gleeunit", version: "1.2.0"),
