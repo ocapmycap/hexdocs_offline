@@ -29,19 +29,30 @@ fn filter_local_paths(in: dict.Dict(String, tom.Toml)) {
   |> dict.from_list()
 }
 
-pub fn get_deps(conf: Config) -> Result(List(Dependency), Nil) {
+pub type DependencyError {
+  GleamFileError(simplifile.FileError)
+  GleamParsingError(tom.ParseError)
+  ManifestFileError(simplifile.FileError)
+  ManifestParsingError(tom.ParseError)
+}
+
+pub fn get_deps(conf: Config) -> Result(List(Dependency), DependencyError) {
   use gleam_contents <- result.try(
-    result.map_error(simplifile.read(conf.gleam_path), fn(_) { Nil }),
+    simplifile.read(conf.gleam_path)
+    |> result.map_error(fn(e) { GleamFileError(e) }),
   )
   use gleam_parsed <- result.try(
-    result.map_error(tom.parse(gleam_contents), fn(_) { Nil }),
+    tom.parse(gleam_contents)
+    |> result.map_error(fn(e) { GleamParsingError(e) }),
   )
 
   use manifest_contents <- result.try(
-    result.map_error(simplifile.read(conf.manifest_path), fn(_) { Nil }),
+    simplifile.read(conf.manifest_path)
+    |> result.map_error(fn(e) { ManifestFileError(e) }),
   )
   use manifest_parsed <- result.try(
-    result.map_error(tom.parse(manifest_contents), fn(_) { Nil }),
+    tom.parse(manifest_contents)
+    |> result.map_error(fn(e) { ManifestParsingError(e) }),
   )
 
   let deps =

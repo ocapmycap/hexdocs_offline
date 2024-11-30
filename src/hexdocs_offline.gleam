@@ -1,5 +1,6 @@
 import gleam/io
 import gleam/list
+import gleam/result
 import gleam/string
 import glexec as exec
 import hexdocs_offline/config.{type Config, default_config}
@@ -15,7 +16,8 @@ pub fn main() {
 }
 
 pub fn generate(conf: Config) {
-  let assert Ok(deps) = toml.get_deps(conf)
+  use deps <- result.try(toml.get_deps(conf))
+
   io.println(
     "Dependencies fetched: "
     <> { list.map(deps, fn(dep) { dep.name }) |> string.join(", ") },
@@ -29,6 +31,8 @@ pub fn generate(conf: Config) {
   let assert Ok(_) = simplifile.write(to: conf.output_path, contents: output)
 
   io.println("Output Successfull: " <> conf.output_path)
+
+  Ok(Nil)
 }
 
 fn gen_output(conf: Config, deps: List(DownloadResult)) {
@@ -76,21 +80,41 @@ fn download_docs(
     [dep, ..rest] -> {
       let cmd =
         exec.Shell("mix hex.docs fetch " <> dep.name <> " " <> dep.version)
-      let assert Ok(exec.Output(out)) =
+
+      let result =
         exec.new() |> exec.with_stdout(exec.StdoutCapture) |> exec.run_sync(cmd)
+      case result {
+        Ok(exec.Output(out)) -> {
+          let assert [exec.Stdout(lines)] = out
+          let assert [line] = lines
 
-      let assert [exec.Stdout(lines)] = out
-      let assert [line] = lines
+          let extracted =
+            line
+            |> string.trim()
+            |> string.split(":")
+            |> list.map(string.trim)
 
-      let assert [_, path] =
-        line
-        |> string.trim()
-        |> string.split(":")
-        |> list.map(string.trim)
+          case extracted {
+            [_, path] -> {
+              let acc = [DownloadResult(dep:, path:), ..acc]
+              download_docs(rest, acc)
+            }
+            _ -> download_docs(rest, acc)
+          }
+        }
+        Error(err) -> {
+          io.println(
+            "Could not fetch docs for '"
+            <> dep.name
+            <> "' (v"
+            <> dep.version
+            <> ")",
+          )
+          io.debug(err)
 
-      let acc = [DownloadResult(dep:, path:), ..acc]
-
-      download_docs(rest, acc)
+          download_docs(rest, acc)
+        }
+      }
     }
     [] -> Ok(acc)
   }
