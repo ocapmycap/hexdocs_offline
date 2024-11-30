@@ -3,6 +3,7 @@
 ////
 
 import gleam/dict
+import gleam/list
 import gleam/result.{unwrap}
 import simplifile
 import tom
@@ -18,5 +19,12 @@ pub fn get_deps() -> Result(List(String), Nil) {
     |> unwrap(dict.new())
     |> dict.keys()
 
-  Ok(deps)
+  let dev_deps =
+    tom.get_table(parsed, ["dev_dependencies"])
+    |> unwrap(dict.new())
+    |> dict.keys()
+
+  deps
+  |> list.append(dev_deps)
+  |> Ok
 }
