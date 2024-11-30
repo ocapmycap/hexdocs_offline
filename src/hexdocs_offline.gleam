@@ -3,6 +3,9 @@ import gleam/string
 import glexec as exec
 import hexdocs_offline/config.{type Config, default_config}
 import hexdocs_offline/toml
+import nakai
+import nakai/attr
+import nakai/html
 import simplifile
 
 pub fn main() {
@@ -21,24 +24,30 @@ pub fn generate(conf: Config) {
 }
 
 fn gen_index_file(deps: List(DownloadResult)) {
-  "<!doctype html>\n"
-  <> "<html lang=\"en\">\n"
-  <> "<head>\n"
-  <> "<meta charset=\"UTF-8\" />\n"
-  <> "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />\n"
-  <> "<title>HexDocs</title>\n"
-  <> "<link rel=\"stylesheet\" href=\"https://cdn.simplecss.org/simple.min.css\">"
-  <> "</head>\n"
-  <> "<body>\n"
-  <> "<ul>\n"
-  <> list.map(deps, fn(dep) {
-    let path = dep.path <> "/index.html"
-    "<li><a href=\"file://" <> path <> "\">" <> dep.dep <> "</a></li>"
-  })
-  |> string.join("\n")
-  <> "</ul>\n"
-  <> "</body>\n"
-  <> "</html>"
+  let list_items =
+    list.map(deps, fn(dep) {
+      let path = dep.path <> "/index.html"
+      let href = "file://" <> path <> "/"
+      html.li([], [html.a([attr.href(href)], [html.Text(dep.dep)])])
+    })
+
+  let head = [
+    html.title("HexDocs"),
+    html.meta([attr.charset("UTF-8")]),
+    html.meta([
+      attr.name("viewport"),
+      attr.content("width=device-width, initial-scale=1.0"),
+    ]),
+    html.link([
+      attr.rel("stylesheet"),
+      attr.href("https://cdn.simplecss.org/simple.min.css"),
+    ]),
+  ]
+
+  let body = [html.ul([], list_items)]
+
+  html.Html([attr.lang("en-US")], [html.Head(head), html.Body([], body)])
+  |> nakai.to_string()
 }
 
 type DownloadResult {
