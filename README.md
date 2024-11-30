@@ -40,8 +40,9 @@ gleam run -m hexdocs_offline
 ```
 
 This will generate the hexdocs with the default configuration:
-- file_path: `./gleam.toml`
-- index_path: `./HEXDOCS.html`
+- gleam_path: `./gleam.toml`
+- manifest_path: `./manifest.toml`
+- output_path: `./HEXDOCS.html`
 - include_dev: `True` *((includes dev dependencies)*
 - ignore_deps: `[]` *(take all dependencies into consideration)*
 
@@ -50,19 +51,18 @@ This will generate the hexdocs with the default configuration:
 //// file `src/dev/generate_hexdocs.gleam`
 import hexdocs_offline.{generate}
 import hexdocs_offline/config.{
-  default_config, with_ignore_deps, with_include_dev, with_index_path,
+  default_config, with_ignore_deps, with_include_dev, with_output_path,
 }
 
 pub fn main() {
   let config =
     default_config()
-    |> with_index_path("HEXDOCS.html")
+    |> with_output_path("./HEXDOCS.html")
     |> with_include_dev(False)
     |> with_ignore_deps(["..."])
 
   generate(config)
 }
-
 ```
 
 ```sh
@@ -81,7 +81,8 @@ gleam test  # Run the tests
 
 # Acknowledgements
 
-- Shoutout to the [Mix Docs](https://hexdocs.pm/hex/Mix.Tasks.Hex.Docs.html) functionality for saving me a lot of pain of recreating this myself
+- Thank you `simplecss` ([GitHub](https://github.com/kevquirk/simple.css/))
+- Thank you [Mix Docs](https://hexdocs.pm/hex/Mix.Tasks.Hex.Docs.html) for saving me a lot of pain of recreating this myself
 
 - Thank you to `go_over` ([Hex](https://hex.pm/packages/go_over), [GitHub](https://github.com/bwireman/go-over)) for inspiring the code that reads out the `gleam.toml` file
 - Thank you to `squirrel` ([Hex](https://hex.pm/packages/squirrel), [GitHub](https://github.com/giacomocavalieri/squirrel)) for a lot of the code and repository structure inspiration

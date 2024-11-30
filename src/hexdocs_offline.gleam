@@ -2,7 +2,7 @@ import gleam/list
 import gleam/string
 import glexec as exec
 import hexdocs_offline/config.{type Config, default_config}
-import hexdocs_offline/toml
+import hexdocs_offline/toml.{type Dependency}
 import nakai
 import nakai/attr
 import nakai/html
@@ -19,16 +19,16 @@ pub fn generate(conf: Config) {
   let assert Ok(deps_with_paths) = download_docs(deps, [])
   let assert Ok(_) = ensure_permissions(conf, deps_with_paths)
 
-  let index_file = gen_index_file(deps_with_paths)
-  simplifile.write(to: conf.index_path, contents: index_file)
+  let output = gen_output(deps_with_paths)
+  simplifile.write(to: conf.output_path, contents: output)
 }
 
-fn gen_index_file(deps: List(DownloadResult)) {
+fn gen_output(deps: List(DownloadResult)) {
   let list_items =
     list.map(deps, fn(dep) {
       let path = dep.path <> "/index.html"
       let href = "file://" <> path
-      html.li([], [html.a([attr.href(href)], [html.Text(dep.dep)])])
+      html.li([], [html.a([attr.href(href)], [html.Text(dep.dep.name)])])
     })
 
   let head = [
@@ -51,16 +51,17 @@ fn gen_index_file(deps: List(DownloadResult)) {
 }
 
 type DownloadResult {
-  DownloadResult(dep: String, path: String)
+  DownloadResult(dep: Dependency, path: String)
 }
 
 fn download_docs(
-  deps: List(String),
+  deps: List(Dependency),
   acc: List(DownloadResult),
 ) -> Result(List(DownloadResult), Nil) {
   case deps {
     [dep, ..rest] -> {
-      let cmd = exec.Shell("mix hex.docs fetch " <> dep)
+      let cmd =
+        exec.Shell("mix hex.docs fetch " <> dep.name <> " " <> dep.version)
       let assert Ok(exec.Output(out)) =
         exec.new() |> exec.with_stdout(exec.StdoutCapture) |> exec.run_sync(cmd)
 
