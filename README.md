@@ -19,10 +19,8 @@ pub fn main() {
 gleam run -m generate_hexdocs
 ```
 
-## CLI
-- add hexdocs dir to .gitignore
-- add config to ignore certain deps
-- name/path of directory
+### Notices
+- you might want to add the resulting `hexdocs` directory to your `.gitignore`
 
 ## Development
 
