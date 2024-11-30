@@ -45,7 +45,8 @@ This will generate the hexdocs with the default configuration:
 - gleam_path: `./gleam.toml`
 - manifest_path: `./manifest.toml`
 - output_path: `./HEXDOCS.html`
-- include_dev: `True` *((includes dev dependencies)*
+- new_tab: `True` *(opens links as a new tab)*
+- include_dev: `True` *(includes dev dependencies)*
 - ignore_deps: `[]` *(take all dependencies into consideration)*
 
 ## Option 2: Custom Config

@@ -10,6 +10,7 @@ pub type Config {
     gleam_path: String,
     output_path: String,
     include_dev: Bool,
+    new_tab: Bool,
     ignore_deps: List(String),
     hex_home: String,
   )
@@ -38,6 +39,7 @@ pub fn default_config() -> Config {
     gleam_path: default_gleam_path(),
     output_path: default_output_path(),
     hex_home: default_hex_home(),
+    new_tab: True,
     include_dev: True,
     ignore_deps: [],
   )
@@ -65,4 +67,8 @@ pub fn with_output_path(config: Config, output_path: String) -> Config {
 
 pub fn with_include_dev(config: Config, include_dev: Bool) -> Config {
   Config(..config, include_dev:)
+}
+
+pub fn with_new_tab(config: Config, new_tab: Bool) -> Config {
+  Config(..config, new_tab:)
 }

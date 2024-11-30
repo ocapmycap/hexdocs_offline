@@ -25,18 +25,24 @@ pub fn generate(conf: Config) {
   let assert Ok(deps_with_paths) = download_docs(deps, [])
   let assert Ok(_) = ensure_permissions(conf, deps_with_paths)
 
-  let output = gen_output(deps_with_paths)
+  let output = gen_output(conf, deps_with_paths)
   let assert Ok(_) = simplifile.write(to: conf.output_path, contents: output)
 
   io.println("Output Successfull: " <> conf.output_path)
 }
 
-fn gen_output(deps: List(DownloadResult)) {
+fn gen_output(conf: Config, deps: List(DownloadResult)) {
   let list_items =
     list.map(deps, fn(dep) {
       let path = dep.path <> "/index.html"
       let href = "file://" <> path
-      html.li([], [html.a([attr.href(href)], [html.Text(dep.dep.name)])])
+
+      let target = case conf.new_tab {
+        True -> attr.target("_blank")
+        False -> attr.target("_self")
+      }
+
+      html.li([], [html.a([attr.href(href), target], [html.Text(dep.dep.name)])])
     })
 
   let head = [
