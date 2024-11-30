@@ -8,13 +8,24 @@ Download an offline version of the hexdocs of your projects dependencies to a lo
 Useful for if you are travelling a lot and do not have a great or any internet connection at all times.
 Or if you just want to have a centralized index page for all of the hexdocs of your dependencies and close 10 of those tabs.
 
+# How?
+
+All this package does is fetch the dependencies from the `gleam.toml` file and uses
+`mix hex.docs fetch ...` to download a local version of them.
+
 # Demo
 
 TODO
 
 # Platform Support
 
-This package supports both the `erlang` and `javascript` target.
+This package works fine on `macos` and `linux`. It has **not** been tested on Windows
+and will probably fail due to the `~/.hex` directory default.
+
+# Required Software
+
+Apart from [Gleam](https://gleam.run/) you will need have to need
+[Mix](https://hexdocs.pm/mix/Mix.html) installed on your system.
 
 # Usage
 
@@ -30,7 +41,7 @@ gleam run -m hexdocs_offline
 
 This will generate the hexdocs with the default configuration:
 - file_path: `./gleam.toml`
-- config_dir: `./hexdocs`
+- index_path: `./HEXDOCS.html`
 - include_dev: `True` *((includes dev dependencies)*
 - ignore_deps: `[]` *(take all dependencies into consideration)*
 
@@ -39,18 +50,19 @@ This will generate the hexdocs with the default configuration:
 //// file `src/dev/generate_hexdocs.gleam`
 import hexdocs_offline.{generate}
 import hexdocs_offline/config.{
-  default_config, with_docs_dir, with_ignore_deps, with_include_dev,
+  default_config, with_ignore_deps, with_include_dev, with_index_path,
 }
 
 pub fn main() {
   let config =
     default_config()
-    |> with_docs_dir("./docs/hex")
+    |> with_index_path("HEXDOCS.html")
     |> with_include_dev(False)
     |> with_ignore_deps(["..."])
 
   generate(config)
 }
+
 ```
 
 ```sh
@@ -58,7 +70,7 @@ gleam run -m dev/generate_hexdocs
 ```
 
 # Notices
-- you might want to add the resulting `hexdocs` directory to your `.gitignore`
+- you might want to add the resulting `HEXDOCS.html` file to your `.gitignore`
 
 # Development
 
@@ -68,6 +80,8 @@ gleam test  # Run the tests
 ```
 
 # Acknowledgements
+
+- Shoutout to the [Mix Docs](https://hexdocs.pm/hex/Mix.Tasks.Hex.Docs.html) functionality for saving me a lot of pain of recreating this myself
 
 - Thank you to `go_over` ([Hex](https://hex.pm/packages/go_over), [GitHub](https://github.com/bwireman/go-over)) for inspiring the code that reads out the `gleam.toml` file
 - Thank you to `squirrel` ([Hex](https://hex.pm/packages/squirrel), [GitHub](https://github.com/giacomocavalieri/squirrel)) for a lot of the code and repository structure inspiration

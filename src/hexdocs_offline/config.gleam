@@ -7,24 +7,30 @@
 pub type Config {
   Config(
     file_path: String,
-    docs_dir: String,
+    index_path: String,
     include_dev: Bool,
     ignore_deps: List(String),
+    hex_home: String,
   )
+}
+
+pub fn default_hex_home() {
+  "~/.hex"
 }
 
 pub fn default_file_path() {
   "./gleam.toml"
 }
 
-pub fn default_docs_dir() {
-  "./hexdocs"
+pub fn default_index_path() {
+  "./HEXDOCS.html"
 }
 
 pub fn default_config() -> Config {
   Config(
     file_path: default_file_path(),
-    docs_dir: default_docs_dir(),
+    index_path: default_index_path(),
+    hex_home: default_hex_home(),
     include_dev: True,
     ignore_deps: [],
   )
@@ -38,8 +44,12 @@ pub fn with_file_path(config: Config, file_path: String) -> Config {
   Config(..config, file_path:)
 }
 
-pub fn with_docs_dir(config: Config, docs_dir: String) -> Config {
-  Config(..config, docs_dir:)
+pub fn with_hex_home(config: Config, hex_home: String) -> Config {
+  Config(..config, hex_home:)
+}
+
+pub fn with_index_path(config: Config, index_path: String) -> Config {
+  Config(..config, index_path:)
 }
 
 pub fn with_include_dev(config: Config, include_dev: Bool) -> Config {
