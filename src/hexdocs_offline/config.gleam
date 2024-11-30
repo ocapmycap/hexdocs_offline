@@ -1,4 +1,8 @@
-import gleam/list
+////
+//// This module holds the main Config record type.
+//// It is used to identify the parameters of which `gleam.toml` file
+//// to use and where to put the resulting html files.
+////
 
 pub type Config {
   Config(

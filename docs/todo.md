@@ -1,9 +1,10 @@
 # TODO
 
-- [ ] inspiration for readme
-  - [ ] badges and links to docs
+- [ ] github
+  - [ ] create releases
+  - [ ] link website (docs)
+- [ ] better error handling? f.e. remove asserts
 - [ ] module & function docs
-- [ ] inspiration main function
 - [ ] examples directory
 - [ ] testing
 - [ ] internal package
