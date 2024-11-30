@@ -1,6 +1,14 @@
 # Hexdocs Offline
 
+## Platform Support
+
+This package supports both the `erlang` and `javascript` target.
+
 ## Usage
+```sh
+gleam add hexdocs_offline --dev
+```
+
 ```gleam
 //// file `hexdocs/generate_hexdocs.gleam`
 import hexdocs_offline.{generate, Config}
