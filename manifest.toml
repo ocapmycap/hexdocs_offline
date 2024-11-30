@@ -5,8 +5,6 @@ packages = [
   { name = "erlexec", version = "2.0.7", build_tools = ["rebar3"], requirements = [], otp_app = "erlexec", source = "hex", outer_checksum = "AF2DD940BB8E32F5AA40A65CB455DCAA18F5334FD3507E9BFD14A021E9630897" },
   { name = "filepath", version = "1.1.0", build_tools = ["gleam"], requirements = ["gleam_stdlib"], otp_app = "filepath", source = "hex", outer_checksum = "67A6D15FB39EEB69DD31F8C145BB5A421790581BD6AA14B33D64D5A55DBD6587" },
   { name = "gleam_erlang", version = "0.32.0", build_tools = ["gleam"], requirements = ["gleam_stdlib"], otp_app = "gleam_erlang", source = "hex", outer_checksum = "B18643083A0117AC5CFD0C1AEEBE5469071895ECFA426DCC26517A07F6AD9948" },
-  { name = "gleam_http", version = "3.7.1", build_tools = ["gleam"], requirements = ["gleam_stdlib"], otp_app = "gleam_http", source = "hex", outer_checksum = "A9EE0722106FCCAB8AD3BF9D0A3EFF92BFE8561D59B83BAE96EB0BE1938D4E0F" },
-  { name = "gleam_httpc", version = "3.0.0", build_tools = ["gleam"], requirements = ["gleam_erlang", "gleam_http", "gleam_stdlib"], otp_app = "gleam_httpc", source = "hex", outer_checksum = "091CDD2BEC8092E82707BEA03FB5205A2BBBDE4A2F551E3C069E13B8BC0C428E" },
   { name = "gleam_stdlib", version = "0.45.0", build_tools = ["gleam"], requirements = [], otp_app = "gleam_stdlib", source = "hex", outer_checksum = "206FCE1A76974AECFC55AEBCD0217D59EDE4E408C016E2CFCCC8FF51278F186E" },
   { name = "gleeunit", version = "1.2.0", build_tools = ["gleam"], requirements = ["gleam_stdlib"], otp_app = "gleeunit", source = "hex", outer_checksum = "F7A7228925D3EE7D0813C922E062BFD6D7E9310F0BEE585D3A42F3307E3CFD13" },
   { name = "glexec", version = "1.0.3", build_tools = ["gleam"], requirements = ["erlexec", "gleam_erlang", "gleam_stdlib"], otp_app = "glexec", source = "hex", outer_checksum = "84565B798262A8B42B1B25C0ACA3C8749BB71A04C6CBE1A16DBB84C23D2A01AA" },
@@ -16,8 +14,6 @@ packages = [
 ]
 
 [requirements]
-gleam_http = { version = ">= 3.7.1 and < 4.0.0" }
-gleam_httpc = { version = ">= 3.0.0 and < 4.0.0" }
 gleam_stdlib = { version = ">= 0.34.0 and < 2.0.0" }
 gleeunit = { version = ">= 1.0.0 and < 2.0.0" }
 glexec = { version = ">= 1.0.3 and < 2.0.0" }
