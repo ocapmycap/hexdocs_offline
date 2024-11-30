@@ -2,7 +2,7 @@ import gleam/list
 import gleam/string
 import glexec as exec
 import hexdocs_offline/config.{type Config, default_config}
-import hexdocs_offline/toml.{type Dependency}
+import hexdocs_offline/internal/toml.{type Dependency}
 import nakai
 import nakai/attr
 import nakai/html

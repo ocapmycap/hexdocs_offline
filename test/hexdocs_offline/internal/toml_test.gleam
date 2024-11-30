@@ -1,7 +1,7 @@
 import gleeunit
 import gleeunit/should
 import hexdocs_offline/config
-import hexdocs_offline/toml
+import hexdocs_offline/internal/toml
 
 pub fn main() {
   gleeunit.main()
