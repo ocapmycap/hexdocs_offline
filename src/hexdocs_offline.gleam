@@ -27,7 +27,7 @@ fn gen_index_file(deps: List(DownloadResult)) {
   let list_items =
     list.map(deps, fn(dep) {
       let path = dep.path <> "/index.html"
-      let href = "file://" <> path <> "/"
+      let href = "file://" <> path
       html.li([], [html.a([attr.href(href)], [html.Text(dep.dep)])])
     })
 
@@ -44,7 +44,7 @@ fn gen_index_file(deps: List(DownloadResult)) {
     ]),
   ]
 
-  let body = [html.ul([], list_items)]
+  let body = [html.h1([], [html.Text("Dependencies")]), html.ul([], list_items)]
 
   html.Html([attr.lang("en-US")], [html.Head(head), html.Body([], body)])
   |> nakai.to_string()
