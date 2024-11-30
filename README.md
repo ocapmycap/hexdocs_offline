@@ -5,18 +5,34 @@
 This package supports both the `erlang` and `javascript` target.
 
 ## Usage
+
+### Installation
 ```sh
 gleam add hexdocs_offline --dev
 ```
 
+### Option 1: Default Config
+```sh
+gleam run -m hexdocs_offline
+```
+
+This will generate the hexdocs with the default configuration:
+- file_path: `./gleam.toml`
+- config_dir: `./hexdocs`
+- include_dev: `True` *((includes dev dependencies)*
+- ignore_deps: `[]` *(take all dependencies into consideration)*
+
+### Option 2: Custom Config
 ```gleam
 //// file `hexdocs/generate_hexdocs.gleam`
-import hexdocs_offline.{generate, Config}
+import hexdocs_offline.{generate}
+import hexdocs_offline/config.{Config, default_file_path}
 
 pub fn main() {
   let config = Config(
-    file_path: "test",
-    docs_dir: "",
+    file_path: default_file_path(),
+    docs_dir: "./docs/hex",
+    include_dev: False,
     ignore_deps: []
   )
   generate(config)

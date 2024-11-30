@@ -1,23 +1,11 @@
 import gleam/list
 import gleam/result
+import hexdocs_offline/config.{type Config}
 import hexdocs_offline/toml
 
 pub fn main() {
-  let config = Config(docs_dir: "", ignore_deps: [])
+  let config = default_config()
   generate(config)
-}
-
-pub type Config {
-  Config(docs_dir: String, ignore_deps: List(String))
-}
-
-pub fn ignore_dep(config: Config, dep: String) -> Config {
-  let ignore_deps = config.ignore_deps |> list.append([dep])
-  Config(..config, ignore_deps:)
-}
-
-pub fn with_docs_dir(config: Config, docs_dir: String) -> Config {
-  Config(..config, docs_dir:)
 }
 
 pub fn generate(config: Config) {
