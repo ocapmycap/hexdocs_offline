@@ -16,6 +16,19 @@ pub type Dependency {
   Dependency(name: String, version: String)
 }
 
+fn filter_local_paths(in: dict.Dict(String, tom.Toml)) {
+  in
+  |> dict.to_list()
+  |> list.filter(fn(entry) {
+    let #(_, value) = entry
+    case value {
+      tom.String(_) -> True
+      _ -> False
+    }
+  })
+  |> dict.from_list()
+}
+
 pub fn get_deps(conf: Config) -> Result(List(Dependency), Nil) {
   use gleam_contents <- result.try(
     result.map_error(simplifile.read(conf.gleam_path), fn(_) { Nil }),
@@ -34,6 +47,7 @@ pub fn get_deps(conf: Config) -> Result(List(Dependency), Nil) {
   let deps =
     tom.get_table(gleam_parsed, ["dependencies"])
     |> unwrap(dict.new())
+    |> filter_local_paths()
     |> dict.keys()
 
   let deps = case conf.include_dev {
@@ -41,6 +55,7 @@ pub fn get_deps(conf: Config) -> Result(List(Dependency), Nil) {
       let dev_deps =
         tom.get_table(gleam_parsed, ["dev-dependencies"])
         |> unwrap(dict.new())
+        |> filter_local_paths()
         |> dict.keys()
 
       list.append(deps, dev_deps)

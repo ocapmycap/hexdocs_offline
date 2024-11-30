@@ -15,7 +15,7 @@ All this package does is fetch the dependencies from the `gleam.toml` file and u
 
 # Demo
 
-TODO
+[HEXDOCS.md](./HEXDOCS.md) for this project
 
 # Platform Support
 
@@ -35,6 +35,8 @@ gleam add hexdocs_offline --dev
 ```
 
 ## Option 1: Default Config
+[Example Repository](./examples/default_config)
+
 ```sh
 gleam run -m hexdocs_offline
 ```
@@ -47,6 +49,8 @@ This will generate the hexdocs with the default configuration:
 - ignore_deps: `[]` *(take all dependencies into consideration)*
 
 ## Option 2: Custom Config
+[Example Repository](./examples/custom_config)
+
 ```gleam
 //// file `src/dev/generate_hexdocs.gleam`
 import hexdocs_offline.{generate}
