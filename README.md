@@ -24,7 +24,7 @@ and will probably fail due to the `~/.hex` directory default.
 
 # Required Software
 
-Apart from [Gleam](https://gleam.run/) you will need have to need
+Apart from [Gleam](https://gleam.run/) you need have
 [Mix](https://hexdocs.pm/mix/Mix.html) installed on your system.
 
 # Usage
