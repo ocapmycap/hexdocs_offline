@@ -1,5 +1,5 @@
 name = "hexdocs_offline"
-version = "1.0.5"
+version = "1.0.6"
 
 description = "Downloads an offline version of the hexdocs of your projects dependencies to a local folder"
 licences = ["Apache-2.0"]
@@ -10,7 +10,7 @@ internal_modules = ["hexdocs_offline/internal", "hexdocs_offline/internal/*"]
 
 [dependencies]
 gleam_stdlib = ">= 0.34.0 and < 2.0.0"
-tom = ">= 1.1.0 and < 2.0.0"
+tom = ">= 2.0.0 and < 3.0.0"
 glexec = ">= 1.0.3 and < 2.0.0"
 simplifile = ">= 2.2.0 and < 3.0.0"
 nakai = ">= 1.1.1 and < 2.0.0"
